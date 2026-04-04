@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/a-kuzmin-reader/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="96x96"
+            href="/a-kuzmin-reader/favicon-96x96.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/a-kuzmin-reader/favicon-16x16.png"
+        />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
+        <title>Читалка Антона Кузьмина</title>
+      <script type="module" crossorigin src="/a-kuzmin-reader/assets/index-jQNiaUcg.js"></script>
+      <link rel="stylesheet" crossorigin href="/a-kuzmin-reader/assets/index-DiUKJpuh.css">
+    <link rel="manifest" href="/a-kuzmin-reader/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/a-kuzmin-reader/registerSW.js"></script></head>
+    <body>
+        <!-- For screen readers -->
+        <a href="#controls" class="skip-link" data-i18n="skip-to-controls"
+            >Skip to controls</a
+        >
+
+        <div id="debug-info"></div>
+
+        <div id="spinner-wrapper">
+            <div id="spinner"></div>
+        </div>
+
+        <div id="page-container">
+            <div id="page-shadow-top"></div>
+            <div id="page"></div>
+            <div id="page-shadow-bottom"></div>
+        </div>
+
+        <div id="controls" role="region" aria-label="controls" dir="ltr">
+            <div id="open-file-and-options">
+                <button id="controls-open-book-button">📁</button>
+                <button id="options-button">⚙️</button>
+                <button id="toc-landscape-button">
+                    <img src="toc-icon.png" alt="Table of contents" />
+                </button>
+            </div>
+            <div id="controls-inner-playback">
+                <button id="play-pause"></button>
+                <button id="previous-button">⏪</button>
+                <button id="next-button">⏩</button>
+            </div>
+            <div id="toc-portrait-and-position">
+                <button id="toc-portrait-button">
+                    <img src="toc-icon.png" alt="Table of contents" />
+                </button>
+                <div id="position-percentage">
+                    <span id="position-percentage-number">0</span><span>%</span>
+                </div>
+            </div>
+        </div>
+
+        <dialog id="toc-dialog">
+            <a
+                href="market://details?id=com.konstiv23.voiceepubreader"
+                class="please-rate"
+                >⭐⭐⭐⭐⭐
+                <span data-i18n="please-rate">Rate, please, rate</span></a
+            >
+
+            <button class="close-dialog-button" aria-label="close">✕</button>
+            <div id="toc-dialog-main">
+                <div id="toc-header-and-search-button">
+                    <h3 data-i18n="table-of-contents">Table of contents</h3>
+                    <button id="search-button" aria-label="search">🔍️</button>
+                </div>
+                <div id="toc-list-wrapper"></div>
+            </div>
+        </dialog>
+
+        <dialog id="open-book-dialog">
+            <a
+                href="market://details?id=com.konstiv23.voiceepubreader"
+                class="please-rate"
+                >⭐⭐⭐⭐⭐
+                <span data-i18n="please-rate">Rate, please, rate</span></a
+            >
+
+            <button class="close-dialog-button" aria-label="close">✕</button>
+            <section id="open-book-dialog-main">
+                <div id="open-file">
+                    <label for="open-file-input" id="open-file-label"
+                        ><span>📁</span
+                        ><span
+                            ><span data-i18n="open-book-file"
+                                >Open a book file from your device</span
+                            >
+                            <span id="open-dialog-formats" data-i18n="format"
+                                >(EPUB format)</span
+                            ></span
+                        ></label
+                    >
+                    <input
+                        type="file"
+                        id="open-file-input"
+                        name="open_book_file"
+                        accept=".epub,application/epub,application/epub+zip,.fb2,application/fb2,application/fb2+xml,application/x-fictionbook,application/x-fictionbook+xml,text/xml,application/xml,.fb2.zip,.fbz,.zip,application/zip,application/x-zip,application/x-zip-compressed"
+                    />
+
+                    <label for="open-file-input-fb2" id="open-file-label-fb2"
+                        ><span>📁</span
+                        ><span
+                            ><span data-i18n="open-book-file"
+                                >Open a book file from your device</span
+                            >
+                            <span
+                                id="open-dialog-formats-fb2"
+                                data-i18n="format-fb2"
+                                >(FB2 format)</span
+                            ></span
+                        ></label
+                    >
+                    <input
+                        type="file"
+                        id="open-file-input-fb2"
+                        name="open_book_file-fb2"
+                        accept=".fb2"
+                    />
+                </div>
+                <div id="recent-books-with-header">
+                    <h3 id="recent-book-header" data-i18n="recent-books">
+                        Recent books
+                    </h3>
+                    <div id="recent-books-list"></div>
+                </div>
+            </section>
+        </dialog>
+
+        <dialog id="options-dialog">
+            <button class="close-dialog-button" aria-label="close">✕</button>
+
+            <a
+                href="market://details?id=com.konstiv23.voiceepubreader"
+                class="please-rate"
+                >⭐⭐⭐⭐⭐
+                <span data-i18n="please-rate">Rate, please, rate</span></a
+            >
+
+            <div id="options-main-wrapper">
+                <section id="options-dialog-main">
+                    <div id="speed-option" class="options-line">
+                        <span data-i18n="speaking-speed">Speaking Speed</span>
+                        <span class="plus-minus-buttons">
+                            <button class="minus-button">-</button>
+                            <span class="numeric-option-value">1.0</span>
+                            <button class="plus-button">+</button>
+                        </span>
+                    </div>
+
+                    <div id="language-option" class="options-line">
+                        <label for="language-select" data-i18n="language"
+                            >Language</label
+                        >
+                        <select
+                            name="language-select"
+                            id="language-select"
+                        ></select>
+                    </div>
+
+                    <div id="voice-option" class="options-line">
+                        <label for="voice-select" data-i18n="voice"
+                            >Voice</label
+                        >
+                        <select name="voice-select" id="voice-select"></select>
+                    </div>
+
+                    <div id="line-height-option" class="options-line">
+                        <span data-i18n="line-height">Line Height</span>
+                        <span class="plus-minus-buttons">
+                            <button class="minus-button">-</button>
+                            <span class="numeric-option-value">1.0</span>
+                            <button class="plus-button">+</button>
+                        </span>
+                    </div>
+
+                    <div id="font-option" class="options-line">
+                        <label for="font-select" data-i18n="font">Font</label>
+                        <select name="font-select" id="font-select"></select>
+                    </div>
+
+                    <div id="margin-option" class="options-line">
+                        <span data-i18n="margin">Margin</span>
+                        <span class="plus-minus-buttons">
+                            <button class="minus-button">-</button>
+                            <span class="numeric-option-value">1</span>
+                            <button class="plus-button">+</button>
+                        </span>
+                    </div>
+
+                    <label class="options-line">
+                        <span data-i18n="page-turning-with-taps"
+                            >Page Turning With Taps</span
+                        >
+                        <div id="tap-page-turning-switch">
+                            <input
+                                id="tap-page-turning-input"
+                                type="checkbox"
+                                checked
+                            />
+                            <span class="slider"></span>
+                        </div>
+                    </label>
+
+                    <div id="licenses-and-version" class="options-line">
+                        <a href="license.md">Open-source licenses</a>
+                        <span id="version-number">v0.4.22ak</span>
+                    </div>
+                </section>
+            </div>
+        </dialog>
+
+        <dialog id="search-dialog">
+            <button class="close-dialog-button" aria-label="close">✕</button>
+            <div id="search-dialog-main">
+                <div id="search-input-combo">
+                    <input
+                        id="search-input"
+                        placeholder="Find..."
+                        autofocus
+                    /><span id="search-icon">🔍</span>
+                </div>
+                <ul id="search-results"></ul>
+            </div>
+        </dialog>
+
+    </body>
+</html>

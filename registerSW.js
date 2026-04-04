@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/a-kuzmin-reader/sw.js', { scope: '/a-kuzmin-reader/' })})}

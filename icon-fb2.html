@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <style>
+        body {
+        }
+
+        #favicon {
+            background-color: rgb(48, 29, 16);
+            color: white;
+            font-family: "Segoe UI";
+            font-size: 30vh;
+            display: inline-flex;
+            flex-direction: column;
+            aspect-ratio: 1 / 1;
+            line-height: 0.85;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            /* transform: scale(0.1); */
+			width: 1000px;
+			height: 1000px;
+
+            #format {
+                font-weight: bold;
+				font-size: 38vh;
+				letter-spacing: 9%;
+            }
+			
+			#format-inner {
+				letter-spacing: 2.75%;
+			}
+
+            #loudspeaker {
+				margin-top: -110px;
+                font-size: 50vh;
+                transform: scaleX(-1);
+            }
+
+            /* #loudspeaker {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: scaleX(-1) translate(50%, -50%);
+                font-size: 75vh;
+                opacity: 0.25;
+            } */
+        }
+    </style>
+    <body>
+        <div id="favicon">
+            <div id="loudspeaker">🕪</div>
+            <div id="format">f<span id="format-inner">b2</span></div>
+        </div>
+    </body>
+</html>
